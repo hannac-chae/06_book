@@ -111,6 +111,127 @@ VALUES (SEQ_BOOK.NEXTVAL, '9788956055466', '책은 도끼다', '박웅현', '인
 ‘넥타이와 청바지는 평등하다’, ‘나이는 숫자에 불과하다’, ‘사람을 향합니다’, ‘진심이 짓는다’, ‘생각이 에너지다’ 등 인간을 향한 따뜻한 시선이 담긴 가치 지향적 광고를 만들며 ‘인문학으로 광고하는’ 광고인으로서 자신만의 독보적인 스타일을 구축한 박웅현. 그는 말한다. 창의력의 전장인 광고계에서 30여 년간 광고를 만들 수 있었던 바탕에는 인문학이 있었고, 그 중심에는 ‘책’이 있었다고. 책을 통해 얻은 예민해진 촉수가 자신의 생업을 도왔다고. 『책은 도끼다』는 인문학적 깊이가 느껴지면서도 사람들의 마음에 깊은 울림을 남긴 광고를 만들어온 저자가 자신의 창의성과 감성을 일깨웠던, 이제는 고전으로 손꼽히는 책들을 소개하는 인문교양서이다.'
       , 1005, 348, 16000, 5, 0);
 COMMIT;
+--=======================================================================
+-- book 테이블의 기본 쿼리들 작성
+-- 1. 1건 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.book_seq = 1
+;  
+-- 2. 전체 조회
+-- (1) 출판사 코드로 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.company_cd = 1001
+; 
+-- (2) 일정 가격 이상인 도서 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.price >= 10000
+; 
+-- (3) 가격 범위 도서 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.price BETWEEN 10000 AND 15000
+; 
+-- (4) 일정 가격 이하인 도서 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b
+ WHERE b.price <= 15000
+; 
+-- (5) 제목, 저자, 출판사 조건 종합 조회
+SELECT b.book_seq
+     , b.isbn
+     , b.title
+     , b.author
+     , b.content
+     , b.company_cd
+     , b.company_nm
+     , b.total_page
+     , b.price
+     , b.quantity
+     , b.reg_id
+     , b.reg_date
+     , b.mod_id
+     , b.mod_date
+  FROM v_book b 
+ WHERE b.title LIKE '%다%'
+    OR b.author LIKE '%다%'
+    OR b.content LIKE '%다%'
+    OR b.company_nm LIKE '%다%'
+;
+-- 3. 1건 입력
+
+-- 4. 1건 수정
+
+-- 5. 1건 삭제
+
+
+-------------------------------------------------------------------------
 -------------------------------------------------------------------------   
 DROP TABLE MANAGER;
 CREATE TABLE MANAGER
@@ -188,3 +309,25 @@ NOCYCLE
 NOMAXVALUE
 INCREMENT BY 1
 ;
+
+/* -----------------------------------------
+   출판사 명이 같이 보이는 뷰를 작성
+   -----------------------------------------
+*/
+CREATE OR REPLACE VIEW v_book 
+AS 
+SELECT b.book_seq     , b.isbn     , b.title
+     , b.author       , b.content  , b.company_cd
+     , c.code_val  company_nm
+     , b.total_page   , b.price    , b.quantity
+     , b.reg_id       , b.reg_date
+     , b.mod_id       , b.mod_date
+  FROM BOOK b JOIN code c ON b.company_cd = c.code
+WITH READ ONLY  
+;  
+
+
+
+
+
+
