@@ -120,6 +120,7 @@ SELECT b.book_seq
      , b.author
      , b.content
      , b.company_cd
+     , b.company_nm
      , b.total_page
      , b.price
      , b.quantity
