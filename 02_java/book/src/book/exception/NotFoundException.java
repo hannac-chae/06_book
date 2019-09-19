@@ -18,9 +18,9 @@ public class NotFoundException extends Exception {
 	}
 	
 	// 중복정의 생성자
-	public NotFoundException(String type, int bookSeq) {
+	public NotFoundException(String type, Book book) {
 		super(String.format("%s:[bookSeq:%d] 도서 정보가 존재하지 않습니다."
-				, type, bookSeq));
+				, type, book.getBookSeq()));
 	}
 }
 

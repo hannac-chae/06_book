@@ -1,7 +1,5 @@
 package book.vo;
 
-import java.math.BigDecimal;
-
 /**
  * MANAGER 테이블과 동일하게 작성된 vo 클래스
  * @author entity
@@ -9,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class Manager {
 
-	private BigDecimal managerSeq;
+	private int managerSeq;
 	private String managerId;
 	private String name;
 	private String password;
@@ -22,11 +20,11 @@ public class Manager {
 		super();
 	}
 
-	public BigDecimal getManagerSeq() {
+	public int getManagerSeq() {
 		return managerSeq;
 	}
 
-	public void setManagerSeq(BigDecimal managerSeq) {
+	public void setManagerSeq(int managerSeq) {
 		this.managerSeq = managerSeq;
 	}
 
@@ -90,7 +88,7 @@ public class Manager {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((managerSeq == null) ? 0 : managerSeq.hashCode());
+		result = prime * result + managerSeq;
 		return result;
 	}
 
@@ -103,10 +101,7 @@ public class Manager {
 		if (getClass() != obj.getClass())
 			return false;
 		Manager other = (Manager) obj;
-		if (managerSeq == null) {
-			if (other.managerSeq != null)
-				return false;
-		} else if (!managerSeq.equals(other.managerSeq))
+		if (managerSeq != other.managerSeq)
 			return false;
 		return true;
 	}

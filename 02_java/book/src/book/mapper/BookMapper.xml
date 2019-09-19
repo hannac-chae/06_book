@@ -86,8 +86,8 @@
 		     , b.quantity	     , b.reg_id
 		     , b.reg_date	     , b.mod_id
 		     , b.mod_date
-		  FROM v_book b
-		 WHERE b.price <![CDATA[>=]]> #{value}
+		  FROM v_book b 
+		 WHERE b.price <![CDATA[ >= ]]> #{value}
 	</select>
 		
 	<!-- 제목, 저자, 출판사명 종합 조회 -->
@@ -147,7 +147,7 @@
 		     , b.price = #{price}
 		     , b.quantity = #{quantity}
 		     , b.mod_id = #{modId} 
-		     , b.mod_date = sysdate
+		     , b.mod_date = SYSDATE
 		 WHERE b.book_seq = #{bookSeq}
 	</update>
 	

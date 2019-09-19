@@ -9,15 +9,15 @@ import java.math.BigDecimal;
  */
 public class Book {
 
-	private BigDecimal bookSeq;
+	private int bookSeq;
 	private String isbn;
 	private String title;
 	private String author;
 	private String content;
-	private BigDecimal companyCd;
+	private int companyCd;
 	private String companyNm;
-	private BigDecimal totalPage;
-	private BigDecimal quantity;
+	private int totalPage;
+	private int quantity;
 	private String regId;
 	private String regDate;
 	private String modId;
@@ -27,11 +27,11 @@ public class Book {
 		super();
 	}
 
-	public BigDecimal getBookSeq() {
+	public int getBookSeq() {
 		return bookSeq;
 	}
 
-	public void setBookSeq(BigDecimal bookSeq) {
+	public void setBookSeq(int bookSeq) {
 		this.bookSeq = bookSeq;
 	}
 
@@ -67,11 +67,11 @@ public class Book {
 		this.content = content;
 	}
 
-	public BigDecimal getCompanyCd() {
+	public int getCompanyCd() {
 		return companyCd;
 	}
 
-	public void setCompanyCd(BigDecimal companyCd) {
+	public void setCompanyCd(int companyCd) {
 		this.companyCd = companyCd;
 	}
 
@@ -83,19 +83,19 @@ public class Book {
 		this.companyNm = companyNm;
 	}
 
-	public BigDecimal getTotalPage() {
+	public int getTotalPage() {
 		return totalPage;
 	}
 
-	public void setTotalPage(BigDecimal totalPage) {
+	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
 
-	public BigDecimal getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(BigDecimal quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
@@ -135,7 +135,7 @@ public class Book {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bookSeq == null) ? 0 : bookSeq.hashCode());
+		result = prime * result + bookSeq;
 		return result;
 	}
 
@@ -148,10 +148,7 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		if (bookSeq == null) {
-			if (other.bookSeq != null)
-				return false;
-		} else if (!bookSeq.equals(other.bookSeq))
+		if (bookSeq != other.bookSeq)
 			return false;
 		return true;
 	}

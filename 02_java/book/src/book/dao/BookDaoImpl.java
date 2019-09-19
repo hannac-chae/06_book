@@ -9,7 +9,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import book.exception.DuplicateException;
 import book.exception.NotFoundException;
 import book.mapper.BookMapper;
 import book.vo.Book;
@@ -225,12 +224,16 @@ public class BookDaoImpl
 	}
 
 	@Override
-	public int update(Map<String, Object> map) throws NotFoundException {
+	public int update(Map<String, Object> map) 
+			                            throws NotFoundException {
 		// 1. 수정하려는 데이터가 존재하는지 검사
-		int bookSeq = ((BigDecimal) map.get("bookSeq")).intValue();
+		int bookSeq = (Integer) map.get("bookSeq");
 		
 		if (!isExists(bookSeq)) {
-			throw new NotFoundException("update", bookSeq);
+			Book book = new Book();
+			book.setBookSeq(bookSeq);
+			
+			throw new NotFoundException("update", book);
 		}
 		
 		// 2. 수정 결과 카운트 변수
@@ -256,9 +259,8 @@ public class BookDaoImpl
 	@Override
 	public int delete(Book book) throws NotFoundException {
 		// 1. 삭제하려는 데이터가 존재하는지 검사
-		if (!isExists(book.getBookSeq().intValue())) {
-			throw new NotFoundException("delete"
-					            , book.getBookSeq().intValue());
+		if (!isExists(book.getBookSeq())) {
+			throw new NotFoundException("delete", book);
 		}
 		
 		// 2. 수정 결과 카운트 변수
@@ -300,7 +302,7 @@ public class BookDaoImpl
 		// 3. 쿼리 실행
 		try {
 			Book book = new Book();			
-			book.setBookSeq(new BigDecimal(bookSeq));
+			book.setBookSeq(bookSeq);
 			
 			int seq = mapper.isExists(book);
 			if (seq > 0) {
