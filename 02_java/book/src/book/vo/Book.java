@@ -17,6 +17,7 @@ public class Book {
 	private int companyCd;
 	private String companyNm;
 	private int totalPage;
+	private int price;
 	private int quantity;
 	private String regId;
 	private String regDate;
@@ -81,6 +82,14 @@ public class Book {
 
 	public void setCompanyNm(String companyNm) {
 		this.companyNm = companyNm;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public int getTotalPage() {
