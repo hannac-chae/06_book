@@ -1,6 +1,6 @@
 package book.vo;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 /**
  * BOOK 테이블의 형태와 동일한 vo 클래스
@@ -9,14 +9,15 @@ import java.math.BigInteger;
  */
 public class Book {
 
-	private BigInteger bookSeq;
+	private BigDecimal bookSeq;
 	private String isbn;
 	private String title;
 	private String author;
 	private String content;
-	private BigInteger companyCd;
-	private BigInteger totalPage;
-	private BigInteger quantity;
+	private BigDecimal companyCd;
+	private String companyNm;
+	private BigDecimal totalPage;
+	private BigDecimal quantity;
 	private String regId;
 	private String regDate;
 	private String modId;
@@ -26,11 +27,11 @@ public class Book {
 		super();
 	}
 
-	public BigInteger getBookSeq() {
+	public BigDecimal getBookSeq() {
 		return bookSeq;
 	}
 
-	public void setBookSeq(BigInteger bookSeq) {
+	public void setBookSeq(BigDecimal bookSeq) {
 		this.bookSeq = bookSeq;
 	}
 
@@ -66,27 +67,35 @@ public class Book {
 		this.content = content;
 	}
 
-	public BigInteger getCompanyCd() {
+	public BigDecimal getCompanyCd() {
 		return companyCd;
 	}
 
-	public void setCompanyCd(BigInteger companyCd) {
+	public void setCompanyCd(BigDecimal companyCd) {
 		this.companyCd = companyCd;
 	}
 
-	public BigInteger getTotalPage() {
+	public String getCompanyNm() {
+		return companyNm;
+	}
+
+	public void setCompanyNm(String companyNm) {
+		this.companyNm = companyNm;
+	}
+
+	public BigDecimal getTotalPage() {
 		return totalPage;
 	}
 
-	public void setTotalPage(BigInteger totalPage) {
+	public void setTotalPage(BigDecimal totalPage) {
 		this.totalPage = totalPage;
 	}
 
-	public BigInteger getQuantity() {
+	public BigDecimal getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(BigInteger quantity) {
+	public void setQuantity(BigDecimal quantity) {
 		this.quantity = quantity;
 	}
 
@@ -150,7 +159,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "책 정보 [bookSeq=" + bookSeq + ", isbn=" + isbn + ", title=" + title + ", author=" + author + ", content="
-				+ content + ", companyCd=" + companyCd + ", totalPage=" + totalPage + ", quantity=" + quantity
+				+ content + ", companyCd=" + companyCd + ", companyNm=" + companyNm + ", totalPage=" + totalPage + ", quantity=" + quantity
 				+ ", regId=" + regId + ", regDate=" + regDate + ", modId=" + modId + ", modDate=" + modDate + "]";
 	}
 

@@ -1,6 +1,6 @@
 package book.vo;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 /**
  * MANAGER 테이블과 동일하게 작성된 vo 클래스
@@ -9,7 +9,7 @@ import java.math.BigInteger;
  */
 public class Manager {
 
-	private BigInteger managerSeq;
+	private BigDecimal managerSeq;
 	private String managerId;
 	private String name;
 	private String password;
@@ -22,11 +22,11 @@ public class Manager {
 		super();
 	}
 
-	public BigInteger getManagerSeq() {
+	public BigDecimal getManagerSeq() {
 		return managerSeq;
 	}
 
-	public void setManagerSeq(BigInteger managerSeq) {
+	public void setManagerSeq(BigDecimal managerSeq) {
 		this.managerSeq = managerSeq;
 	}
 
