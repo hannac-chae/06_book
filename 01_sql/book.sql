@@ -226,11 +226,33 @@ SELECT b.book_seq
     OR b.company_nm LIKE '%다%'
 ;
 -- 3. 1건 입력
+INSERT INTO BOOK 
+(BOOK_SEQ, ISBN, TITLE, AUTHOR, CONTENT, COMPANY_CD, TOTAL_PAGE, PRICE, QUANTITY, REG_ID)
+VALUES (SEQ_BOOK.NEXTVAL, '', '', '', '', 1003, 192, 10800, 5, 0)
+;
 
 -- 4. 1건 수정
+UPDATE BOOK b
+   SET b.isbn = ''
+     , b.title = '채식주의자(수정)'
+     , b.author = ''
+     , b.content = ''
+     , b.company_cd = ''
+     , b.total_page = ''
+     , b.price = ''
+     , b.quantity = ''
+     , b.mod_id = ''
+     , b.mod_date = sysdate
+ WHERE b.book_seq = 1
+; 
+--rollback;
+
 
 -- 5. 1건 삭제
-
+DELETE BOOK b
+ WHERE b.book_seq = 1
+; 
+--rollback;
 
 -------------------------------------------------------------------------
 -------------------------------------------------------------------------   
