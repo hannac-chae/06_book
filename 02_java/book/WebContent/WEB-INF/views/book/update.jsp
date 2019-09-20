@@ -43,54 +43,55 @@
 		<tr>
 			<th>출판사</th>
 			<td>
-<%-- 				${book.companyNm} --%>
-<!-- 				(input[type="radio" name="companyCd" value="100$" id="100$"] -->
-<!-- 				+label[for="100$"]{출판사이름}) -->
-<!-- 				*5 -->
-			<c:if test="${book.companyCd eq 1001}">
-				<input type="radio" name="companyCd" value="1001" id="1001" checked="checked"/>
-				<label for="1001">창비</label>
+		  <c:forEach var="code" items="${codes}">
+			<c:if test="${book.companyCd eq code.code}">
+				<input type="radio" name="companyCd" 
+				       value="${code.code}" 
+				       id="${code.code}" checked="checked"/>
+				<label for="${code.code}">${code.codeVal}</label>
 			</c:if>
-			<c:if test="${book.companyCd ne 1001}">
-				<input type="radio" name="companyCd" value="1001" id="1001" />
-				<label for="1001">창비</label>
+			<c:if test="${book.companyCd ne code.code}">
+				<input type="radio" name="companyCd" 
+				       value="${code.code}" id="${code.code}" />
+				<label for="${code.code}">${code.codeVal}</label>
 			</c:if>
+		  </c:forEach>
 			
-			<c:if test="${book.companyCd eq 1002}">
-				<input type="radio" name="companyCd" value="1002" id="1002" checked="checked"/>
-				<label for="1002">더 스토리</label>
-			</c:if>
-			<c:if test="${book.companyCd ne 1002}">
-				<input type="radio" name="companyCd" value="1002" id="1002" />
-				<label for="1002">더 스토리</label>
-			</c:if>
+<%-- 			<c:if test="${book.companyCd eq 1002}"> --%>
+<!-- 				<input type="radio" name="companyCd" value="1002" id="1002" checked="checked"/> -->
+<!-- 				<label for="1002">더 스토리</label> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${book.companyCd ne 1002}"> --%>
+<!-- 				<input type="radio" name="companyCd" value="1002" id="1002" /> -->
+<!-- 				<label for="1002">더 스토리</label> -->
+<%-- 			</c:if> --%>
 			
-			<c:if test="${book.companyCd eq 1003}">		
-				<input type="radio" name="companyCd" value="1003" id="1003" checked="checked"/>
-				<label for="1003">위즈덤</label>
-			</c:if>
-			<c:if test="${book.companyCd ne 1003}">		
-				<input type="radio" name="companyCd" value="1003" id="1003"/>
-				<label for="1003">위즈덤</label>
-			</c:if>
+<%-- 			<c:if test="${book.companyCd eq 1003}">		 --%>
+<!-- 				<input type="radio" name="companyCd" value="1003" id="1003" checked="checked"/> -->
+<!-- 				<label for="1003">위즈덤</label> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${book.companyCd ne 1003}">		 --%>
+<!-- 				<input type="radio" name="companyCd" value="1003" id="1003"/> -->
+<!-- 				<label for="1003">위즈덤</label> -->
+<%-- 			</c:if> --%>
 			
-			<c:if test="${book.companyCd eq 1004}">
-				<input type="radio" name="companyCd" value="1004" id="1004" checked="checked"/>
-				<label for="1004">흔</label>
-			</c:if>
-			<c:if test="${book.companyCd ne 1004}">
-				<input type="radio" name="companyCd" value="1004" id="1004"/>
-				<label for="1004">흔</label>
-			</c:if>
+<%-- 			<c:if test="${book.companyCd eq 1004}"> --%>
+<!-- 				<input type="radio" name="companyCd" value="1004" id="1004" checked="checked"/> -->
+<!-- 				<label for="1004">흔</label> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${book.companyCd ne 1004}"> --%>
+<!-- 				<input type="radio" name="companyCd" value="1004" id="1004"/> -->
+<!-- 				<label for="1004">흔</label> -->
+<%-- 			</c:if> --%>
 			
-			<c:if test="${book.companyCd eq 1005}">
-				<input type="radio" name="companyCd" value="1005" id="1005" checked="checked"/>
-				<label for="1005">북 하우스</label>
-			</c:if>
-			<c:if test="${book.companyCd ne 1005}">
-				<input type="radio" name="companyCd" value="1005" id="1005" />
-				<label for="1005">북 하우스</label>
-			</c:if>
+<%-- 			<c:if test="${book.companyCd eq 1005}"> --%>
+<!-- 				<input type="radio" name="companyCd" value="1005" id="1005" checked="checked"/> -->
+<!-- 				<label for="1005">북 하우스</label> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${book.companyCd ne 1005}"> --%>
+<!-- 				<input type="radio" name="companyCd" value="1005" id="1005" /> -->
+<!-- 				<label for="1005">북 하우스</label> -->
+<%-- 			</c:if> --%>
 			</td>
 		</tr>
 		<tr>
