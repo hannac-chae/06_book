@@ -13,16 +13,16 @@
 <!-- ul>li*5 -->
 <ul>
   <!-- 로그인 되지 않아서 세션이 없을 때 보여줄 메뉴 -->
-<%--   <c:if test="${empty sessionScope.userId}"> --%>
-<!-- 	<li><a href="">로그인 하기</a></li> -->
-<%--   </c:if> --%>
+  <c:if test="${empty sessionScope.userId}">
+	<li><a href="${contextPath}/main?action=login">로그인 하기</a></li>
+  </c:if>
   
   <!-- 로그인 되어서 세션이 존재할 때 보여줄 메뉴 -->
-<%--   <c:if test="${not empty sessionScope.userId}"> --%>
+  <c:if test="${not empty sessionScope.userId}">
 	<li><a href="${contextPath}/main?action=select">책 목록 보기</a></li>
 	<li><a href="${contextPath}/main?action=insert">책 정보 등록</a></li>
-<!-- 	<li><a href="">로그 아웃</a></li> -->
-<%--   </c:if> --%>
+	<li><a href="${contextPath}/main?action=logout">로그 아웃</a></li>
+  </c:if>
   
 </ul>
 
