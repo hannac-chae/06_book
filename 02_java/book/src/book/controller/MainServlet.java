@@ -14,10 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import book.dao.BookDaoIf;
 import book.dao.BookDaoImpl;
+import book.dao.CodeDaoIf;
+import book.dao.CodeDaoImpl;
 import book.dao.ManagerDaoIf;
 import book.dao.ManagerDaoImpl;
 import book.exception.NotFoundException;
 import book.vo.Book;
+import book.vo.Code;
 import book.vo.Manager;
 
 /**
@@ -199,6 +202,11 @@ public class MainServlet extends HttpServlet {
 			// mainContent 화면 결정
 			String mainContent = "/insertBook";
 			request.setAttribute("content", mainContent);
+			
+			// 출판사 목록을 조회해서 요청 객체에 추가
+			CodeDaoIf dao = new CodeDaoImpl();
+			List<Code> codes = dao.selectCompanies();
+			request.setAttribute("codes", codes);
 			
 			// /index 로 이동
 			String view = "/index";
