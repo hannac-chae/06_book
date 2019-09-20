@@ -20,6 +20,7 @@
 		<if test="bookSeq != null">		  
 		 WHERE b.book_seq = #{bookSeq}
 		</if>
+		 ORDER BY book_seq
 	</select>
 	
 	<!-- 출판사 코드로 도서 검색 -->

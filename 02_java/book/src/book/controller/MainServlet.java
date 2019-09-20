@@ -51,8 +51,157 @@ public class MainServlet extends HttpServlet {
 		} else if ("update".equals(action)) {
 			update(request, response);
 			
+		} else if ("delete".equals(action)) {
+			delete(request, response);
+			
+		} else if ("insert".equals(action)) {
+			insert(request, response);
 		}
 		
+	}
+
+	/**
+	 * 도서 정보 1건을 신규 입력하는 메소드
+	 * GET 요청 : 신규 입력할 수 있는 화면 제공
+	 * POST 요청 : 서버로 전달된 form 파라미터를 사용하여 
+	 *           DB 에 insert 쿼리 수행
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void insert(HttpServletRequest request
+			          , HttpServletResponse response) throws ServletException, IOException {
+		// 1. 요청된 HTTP 메소드 추출
+		String method = request.getMethod();
+
+		
+		if ("GET".equals(method)) {
+			// 2. GET 요청 처리 : 신규 입력 화면 제공
+			// mainContent 화면 결정
+			String mainContent = "/insertBook";
+			request.setAttribute("content", mainContent);
+			
+			// /index 로 이동
+			String view = "/index";
+			request.getRequestDispatcher(view)
+			       .forward(request, response);
+			
+		} else if ("POST".equals(method)) {
+			// 3. POST 요청 처리 : 신규 입력 저장 처리
+			// (1) insert.jsp 에서 넘어오는 form 파라미터 추출
+//			int bookSeq = Integer.valueOf(request.getParameter("bookSeq"));
+			String isbn = request.getParameter("isbn");
+			String title = request.getParameter("title");
+			String author = request.getParameter("author");
+			String content = request.getParameter("content");
+			int companyCd = Integer.valueOf(request.getParameter("companyCd"));
+			int totalPage = Integer.valueOf(request.getParameter("totalPage"));
+			int price = Integer.valueOf(request.getParameter("price"));
+			int quantity = Integer.valueOf(request.getParameter("quantity"));
+			String regId = "1";
+			
+			// (2) 요청 파라미터 맵 객체에 추가 + 로그인 된 아이디 추가
+			Map<String, Object> bookMap = new HashMap<>();
+//			bookMap.put("bookSeq", bookSeq);
+			bookMap.put("isbn", isbn);
+			bookMap.put("title", title);
+			bookMap.put("author", author);
+			bookMap.put("content", content);
+			bookMap.put("companyCd", companyCd);
+			bookMap.put("totalPage", totalPage);
+			bookMap.put("price", price);
+			bookMap.put("quantity", quantity);
+			bookMap.put("regId", regId);
+			
+			// (3) dao 객체 얻기
+			BookDaoIf dao = new BookDaoImpl();
+			
+			// (4) dao 로 insert 쿼리 수행
+			try {
+				dao.insert(bookMap);
+				
+				// (5-1) 입력 성공에 대한 화면 이동
+				// 입력 성공 메시지 생성
+				String message = 
+					String.format("도서 정보 1건 [%s] 추가 성공", title);
+				request.setAttribute("message", message);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				// (5-2) 입력 실패 수행 결과 처리하여 화면 이동
+				String message = e.getMessage();
+				request.setAttribute("message", message);
+			}
+		
+
+			// 입력 성공 메지시 처리 후 이동할 nextPage 속성 설정
+			String nextPage = "main?action=select";
+			request.setAttribute("nextPage", nextPage);
+			
+			// 메인 컨텐트 영역에 표시할 content 속성 설정
+			String mainContent = "/messageBook";
+			request.setAttribute("content", mainContent);
+			
+			// 이동할 뷰 화면 설정
+			String view = "/index";
+			request.getRequestDispatcher(view).forward(request, response);
+			
+		}
+		
+		
+	}
+
+	/**
+	 * 도서 정보 1건 삭제 메소드
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void delete(HttpServletRequest request
+			          , HttpServletResponse response) throws ServletException, IOException {
+		// 1. 삭제할 도서 bookSeq 파라미터 추출
+		int bookSeq = Integer.valueOf(request.getParameter("bookSeq"));
+		
+		// 2. dao 객체 얻기
+		BookDaoIf dao = new BookDaoImpl();
+		
+		try {
+			Book book = new Book();
+			book.setBookSeq(bookSeq);
+			// 3. dao 로 delete 쿼리 수행
+			dao.delete(book);
+			
+			// 4. 삭제 성공에 따른 화면 이동
+			// (1) 삭제 성공 화면 이동
+			// 삭제 성공 메시지 생성 & 요청에 추가
+			String message = 
+					String.format("도서 정보[일련번호:%d] 삭제 성공", book.getBookSeq());
+			request.setAttribute("message", message);
+			
+		} catch (NotFoundException e) {
+			// (2) 삭제 실패 메시지 작성
+			String message = e.getMessage();
+			request.setAttribute("message", message);
+
+		}
+		
+		// 삭제 성공, 실패 메시지를 2초간 보여준 후 이동할 nextPage 속성 설정
+		// 삭제 후에는 보여줄 상세페이지가 없으므로 목록으로 이동
+		String nextPage = "/main?action=select";
+		request.setAttribute("nextPage", nextPage);
+		
+		// 메인 컨텐트 화면에 갈아끼울 content 속성 설정
+		String mainContent = "/messageBook";
+		request.setAttribute("content", mainContent);
+		
+		// /index 로 화면 이동
+		String view = "/index";
+		request.getRequestDispatcher(view)
+		       .forward(request, response);
+		
+
 	}
 
 	/**

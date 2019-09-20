@@ -43,8 +43,9 @@
   			<fmt:formatNumber value="${book.price}" 
   			                  type="number"/>
   		</td>
-  		<td>&nbsp;</td>
+  		<td><a href="${contextPath}/main?action=delete&bookSeq=${book.bookSeq}">삭제</a></td>
   	</tr>
+  	
   </c:forEach>	
 </table>
 
