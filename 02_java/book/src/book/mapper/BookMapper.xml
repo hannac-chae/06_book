@@ -160,10 +160,10 @@
 	<!-- 도서 1건 존재 여부 검색 -->
 	<select id="isExists" 
 	        parameterType="Book"
-	        resultType="int">
-		SELECT b.bookSeq
+	        resultType="integer">
+		SELECT b.book_seq
 		  FROM book b
-		 WHERE b.bookSeq = #{bookSeq}
+		 WHERE b.book_seq = #{bookSeq}
 	</select>
 </mapper>
 

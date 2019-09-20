@@ -19,8 +19,8 @@
   
   <!-- 로그인 되어서 세션이 존재할 때 보여줄 메뉴 -->
 <%--   <c:if test="${not empty sessionScope.userId}"> --%>
-	<li><a href="${pageContext.request.contextPath}/main?action=select">책 목록 보기</a></li>
-	<li><a href="${pageContext.request.contextPath}/main?action=insert">책 정보 등록</a></li>
+	<li><a href="${contextPath}main?action=select">책 목록 보기1</a></li>
+	<li><a href="${contextPath}main?action=insert">책 정보 등록2</a></li>
 <!-- 	<li><a href="">로그 아웃</a></li> -->
 <%--   </c:if> --%>
   

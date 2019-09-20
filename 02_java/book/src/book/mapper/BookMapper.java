@@ -17,7 +17,7 @@ public interface BookMapper {
 	int insert(Map<String, Object> map);
 	int update(Map<String, Object> map);
 	int delete(Book book);
-	int isExists(Book book);
+	Integer isExists(Book book);
 }
 
 
