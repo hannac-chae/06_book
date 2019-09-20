@@ -349,6 +349,13 @@ SELECT b.book_seq     , b.isbn     , b.title
 WITH READ ONLY  
 ;  
 
+--===============================================================
+-- 관리자 로그인 쿼리
+SELECT m.manager_seq
+  FROM MANAGER m
+ WHERE m.manager_seq = 0
+;  
+   
 
 
 
